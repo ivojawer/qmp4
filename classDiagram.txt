@@ -15,7 +15,7 @@ class ClimaMock{
 class Usuario {
 -prendas
 -residencia
-+sugerenciaDiaTemperatura(climaGetter)
+-climaGetter
 +generarSugerenciaDia()
 }
 

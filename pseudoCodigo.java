@@ -64,12 +64,9 @@ class AccuWeatherAPI{
 public class Usuario implements GeneradorSugerencias{
     private Locacion residencia;
     private List<Prenda> prendas;
+    private Clima climaGetter = new Clima();
 
     public List<Sugerencia> sugerenciasDia(){
-        this.sugerenciasDiaPorTemperatura(new Clima());
-    }
-
-    public List<Sugerencia> sugerenciasDiaPorTemperatura(Clima climaGetter){
         final List<Prenda> prendasAptas = 
         prendas
         .stream()
@@ -77,9 +74,13 @@ public class Usuario implements GeneradorSugerencias{
         .collect(Collectors.toList());
         this.generarSugerenciasDesde(prendasAptas);
     }
+
+    public void setClimaGetter(Clima newClimaGetter){
+        this.climaGetter = newClimaGetter;
+    }
 }
 public interface GeneradorSugerencias {
-    private List<Sugerencia> generarSugerenciasDesde(List<Prenda> prendasAptas);
+    public List<Sugerencia> generarSugerenciasDesde(List<Prenda> prendasAptas);
 }
 
 
@@ -120,10 +121,8 @@ public void testSugerenciaDia(){
         new Locacion("Argentina","Buenos Aires","Av. Rivadavia 1"),
         Arrays.asList(sombrero,saco,camisa,musculosa,zapatos)
     );
+    user.setClimaGetter(new ClimaMock());
     Sugerencia sugerencia1=new Sugerencia(sombrero,camisa,zapatos);
     Sugerencia sugerencia2=new Sugerencia(sombrero,saco,zapatos);
-    assertEquals(
-        user.sugerenciasDiaPorTemperatura(new ClimaMock()),
-        Arrays.asList(sugerencia1,sugerencia2)
-    );
+    Assert.assertEquals(user.sugerenciasDia(),Arrays.asList(sugerencia1,sugerencia2));
 }
