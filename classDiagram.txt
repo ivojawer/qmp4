@@ -1,0 +1,35 @@
+@startuml
+class AccuWeatherAPI{
++getWeather()
+}
+
+class Clima{
++temperatura()
+}
+
+class Usuario {
+-prendas
+-locacion
++generarSugerenciaDia()
+}
+
+class Prenda{
++validaParaTemperatura(temperatura)
+}
+
+class Locacion{
+-pais
+-ciudad
+-direccion
+}
+
+interface GeneradorSugerencias{
++generarSugerenciasDesde(prendasAptas)
+}
+
+GeneradorSugerencias <|.. Usuario
+Clima ..> AccuWeatherAPI
+Usuario ..> Clima
+Usuario --> Locacion
+Usuario --> "*" Prenda
+@enduml
