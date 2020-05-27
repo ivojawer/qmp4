@@ -4,7 +4,7 @@ class AccuWeatherAPI{
 }
 
 class Clima{
-+temperatura()
++temperatura(ciudad)
 }
 
 class Usuario {
