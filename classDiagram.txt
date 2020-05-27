@@ -5,11 +5,17 @@ class AccuWeatherAPI{
 
 class Clima{
 +temperatura(ciudad)
+-climaFetch(ciudad)
+}
+
+class ClimaMock{
+-climaFetch(ciudad)
 }
 
 class Usuario {
 -prendas
--locacion
+-residencia
++sugerenciaDiaTemperatura(climaGetter)
 +generarSugerenciaDia()
 }
 
@@ -24,11 +30,12 @@ class Locacion{
 }
 
 interface GeneradorSugerencias{
-+generarSugerenciasDesde(prendasAptas)
+-generarSugerenciasDesde(prendasAptas)
 }
 
 GeneradorSugerencias <|.. Usuario
 Clima ..> AccuWeatherAPI
+Clima <|-- ClimaMock
 Usuario ..> Clima
 Usuario --> Locacion
 Usuario --> "*" Prenda
